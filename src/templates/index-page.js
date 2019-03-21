@@ -45,22 +45,26 @@ export const IndexPageTemplate = ({
       <p>
         {isLoggedIn() ? (
           <>
-            You are logged in, so check your{" "}
-            <Link to="/app/profile">profile</Link>
+            You are logged in, so check your <Link to="/profile">profile</Link>
             <br />
             <br />
             <Button onClick={handleIMPSubmit}>Spend your money</Button>
           </>
         ) : (
           <>
-            You should <Link to="/app/login">log in</Link> to see restricted
-            content
+            You should <Link to="/login">log in</Link> to see restricted content
           </>
         )}
       </p>
       <Header as="h3">{mainpitch.title}</Header>
       <div>
-        <img src={image} alt="startup school" width="600px" />
+        <img
+          src={
+            !!image.childImageSharp ? image.childImageSharp.fluid.src : image
+          }
+          alt="startup school"
+          width="600px"
+        />
       </div>
       <strong>{heading}</strong>
       <p>{subheading}</p>
@@ -102,7 +106,7 @@ export const pageQuery = graphql`
       frontmatter {
         image {
           childImageSharp {
-            fluid(maxWidth: 240, quality: 64) {
+            fluid(maxWidth: 240, quality: 100) {
               ...GatsbyImageSharpFluid
             }
           }
