@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
+import { Header, Container, Button } from "semantic-ui-react"
 import { getUser, isLoggedIn } from "../services/auth"
 import Helmet from "react-helmet"
 
@@ -46,21 +47,27 @@ export default () => {
           src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
         />
       </Helmet>
-      <h1>Hello {isLoggedIn() ? getUser().name : "world"}!</h1>
-      <p>
-        {isLoggedIn() ? (
-          <>
-            You are logged in, so check your{" "}
-            <Link to="/app/profile">profile</Link> or
-            <button onClick={handleIMPSubmit}>Spend your money</button>
-          </>
-        ) : (
-          <>
-            You should <Link to="/app/login">log in</Link> to see restricted
-            content
-          </>
-        )}
-      </p>
+      <Container>
+        <Header as="h1">
+          Hello {isLoggedIn() ? getUser().name : "world"}!
+        </Header>
+        <p>
+          {isLoggedIn() ? (
+            <>
+              You are logged in, so check your{" "}
+              <Link to="/app/profile">profile</Link>
+              <br />
+              <br />
+              <Button onClick={handleIMPSubmit}>Spend your money</Button>
+            </>
+          ) : (
+            <>
+              You should <Link to="/app/login">log in</Link> to see restricted
+              content
+            </>
+          )}
+        </p>
+      </Container>
     </Layout>
   )
 }
