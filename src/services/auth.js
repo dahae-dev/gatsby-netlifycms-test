@@ -32,12 +32,12 @@ export const handleSignup = async ({ username, password, name, email }) => {
     })
 }
 
-export const handleLogin = async ({ username, password }) => {
+export const handleLogin = async ({ email, password }) => {
   const users = await fetch(`https://koreanjson.com/users`)
     .then(res => res.json())
     .catch(err => console.log(err))
 
-  const user = users.filter(user => user.username === username)[0]
+  const user = users.filter(user => user.email === email)[0]
 
   const result = await fetch(`https://koreanjson.com/users/${user.id}`)
     .then(res => res.json())
@@ -45,7 +45,7 @@ export const handleLogin = async ({ username, password }) => {
 
   // console.log("result: ", result)
 
-  if (username === result.username && password === `pass`) {
+  if (email === result.email && password === `pass`) {
     setUser({
       username: result.username,
       name: result.name,
