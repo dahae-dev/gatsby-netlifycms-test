@@ -24,6 +24,8 @@ export default () => {
         {` `}
         <Link to="/app/profile">Profile</Link>
         {` `}
+        <Link to="/app/signup">Sign up</Link>
+        {` `}
         {isLoggedIn() ? (
           <a
             href="/"
@@ -34,7 +36,17 @@ export default () => {
           >
             Logout
           </a>
-        ) : null}
+        ) : (
+          <a
+            href="/"
+            onClick={event => {
+              event.preventDefault()
+              navigate(`/app/login`)
+            }}
+          >
+            Login
+          </a>
+        )}
       </nav>
     </div>
   )

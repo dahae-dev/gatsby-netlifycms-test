@@ -1,12 +1,14 @@
 import React from "react"
 import { navigate } from "gatsby"
-import { handleLogin, isLoggedIn } from "../services/auth"
+import { handleSignup, isLoggedIn } from "../services/auth"
 
-class Login extends React.Component {
+class Signup extends React.Component {
   state = {
     username: ``,
     password: ``,
-    isLoggedIn: false,
+    name: ``,
+    email: ``,
+    isSignedUp: false,
   }
 
   handleUpdate = event => {
@@ -17,8 +19,10 @@ class Login extends React.Component {
 
   handleSubmit = async event => {
     event.preventDefault()
-    const isLoggedIn = await handleLogin(this.state)
-    this.setState({ isLoggedIn })
+    const result = await handleSignup(this.state)
+    this.setState({
+      isSignedUp: result,
+    })
   }
 
   render() {
@@ -26,9 +30,13 @@ class Login extends React.Component {
       navigate(`/app/profile`)
     }
 
+    if (this.state.isSignedUp) {
+      navigate(`/app/login`)
+    }
+
     return (
       <>
-        <h1>Log in</h1>
+        <h1>Sign up</h1>
         <form
           method="post"
           onSubmit={event => {
@@ -40,6 +48,7 @@ class Login extends React.Component {
             Username
             <input type="text" name="username" onChange={this.handleUpdate} />
           </label>
+          <br />
           <label>
             Password
             <input
@@ -48,11 +57,22 @@ class Login extends React.Component {
               onChange={this.handleUpdate}
             />
           </label>
-          <input type="submit" value="Log In" />
+          <br />
+          <label>
+            Name
+            <input type="text" name="name" onChange={this.handleUpdate} />
+          </label>
+          <br />
+          <label>
+            Email
+            <input type="email" name="email" onChange={this.handleUpdate} />
+          </label>
+          <br />
+          <input type="submit" value="Sign up" />
         </form>
       </>
     )
   }
 }
 
-export default Login
+export default Signup
