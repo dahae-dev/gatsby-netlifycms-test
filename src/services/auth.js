@@ -1,3 +1,5 @@
+import config from "../../.config"
+
 export const isBrowser = () => typeof window !== "undefined"
 
 export const getUser = () =>
@@ -10,7 +12,7 @@ export const setUser = user => {
 }
 
 export const handleSignup = async ({ username, password, name, email }) => {
-  await fetch(`https://koreanjson.com/users`, {
+  await fetch(config.SERVER_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
