@@ -4,8 +4,7 @@
 
 import React, { useState } from "react"
 import { navigate } from "gatsby"
-import Layout from "../../components/layout"
-
+import { FacebookLoginButton } from "react-social-login-buttons"
 import {
   Header,
   Container,
@@ -15,8 +14,12 @@ import {
   Segment,
   Message,
 } from "semantic-ui-react"
+
+import Layout from "../../components/layout"
 import { handleLogin, isLoggedIn } from "../../services/auth"
 import useForm from "../../components/useForm"
+import http from "../../services/httpService"
+import config from "../../../.config"
 
 const LoginPage = () => {
   const [loading, setLoading] = useState(false)
@@ -54,9 +57,23 @@ const LoginPage = () => {
     ))
   }
 
+  const handleLogin = async social => {
+    switch (social) {
+      case "facebook":
+        const data = await http.get(`${config.SERVER_URL}/auth/${social}`)
+        console.log("TCL: LoginPage -> data", data)
+        if (data) navigate("/profile")
+        break
+      default:
+        throw new Error("[-] Social login type not mentioned.")
+    }
+  }
+
   if (isLoggedIn()) {
     navigate(`/profile`)
   }
+
+  const urlForFacebookLogin = `${config.SERVER_URL}/auth/facebook`
 
   return (
     <>
@@ -107,6 +124,9 @@ const LoginPage = () => {
               <Button type="submit" color="blue">
                 Sign in with Facebook
               </Button>
+              <a href={urlForFacebookLogin}>
+                <FacebookLoginButton />
+              </a>
             </Segment>
           </Form>
         </Container>
@@ -114,6 +134,8 @@ const LoginPage = () => {
     </>
   )
 }
+
+// <FacebookLoginButton onClick={() => handleLogin("facebook")} />
 
 export default LoginPage
 
