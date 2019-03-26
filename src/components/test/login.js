@@ -1,7 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-unused-vars */
-
 import React, { useState } from "react"
 import { navigate } from "gatsby"
 import {
@@ -13,8 +9,8 @@ import {
   Segment,
   Message,
 } from "semantic-ui-react"
-import { handleLogin, isLoggedIn } from "../services/auth"
-import useForm from "./useForm"
+import { handleLogin, isLoggedIn } from "../../services/auth"
+import useForm from "../reusable/useForm"
 
 const Login = () => {
   const [loading, setLoading] = useState(false)

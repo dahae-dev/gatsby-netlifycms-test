@@ -1,14 +1,16 @@
 import React from "react"
+import styled from "styled-components"
 import { Link, navigate } from "gatsby"
-import { getUser, isLoggedIn, logout } from "../services/auth"
+import { isLoggedIn, logout } from "../services/auth"
+import Logo from "./reusable/Logo"
+
+const StyledLink = styled(Link)`
+  &:hover {
+    text-decoration: none;
+  }
+`
 
 export default () => {
-  const content = { message: "", login: true }
-  if (isLoggedIn()) {
-    content.message = `Hello, ${getUser().name}`
-  } else {
-    content.message = "You are not logged in"
-  }
   return (
     <div
       style={{
@@ -18,34 +20,62 @@ export default () => {
         borderBottom: "1px solid #d1c1e0",
       }}
     >
-      <span>{content.message}</span>
       <nav>
-        <Link to="/">Home</Link>
+        <StyledLink to="/">
+          <Logo />
+        </StyledLink>
+        <StyledLink to="/about">ABOUT</StyledLink>
         {` `}
-        <Link to="/profile">Profile</Link>
+        <StyledLink to="/topics">TOPICS</StyledLink>
         {` `}
-        {/* <Link to="/signup">Sign up</Link>
-        {` `} */}
+        <StyledLink to="/faq">FAQ</StyledLink>
+        {` `}
+        <StyledLink to="/apply">APPLY</StyledLink>
+        {` `}
+      </nav>
+      <nav>
         {isLoggedIn() ? (
-          <a
-            href="/"
-            onClick={event => {
-              event.preventDefault()
-              logout(() => navigate(`/login`))
-            }}
-          >
-            Logout
-          </a>
+          <span>
+            <a
+              href="/"
+              onClick={event => {
+                event.preventDefault()
+                logout(() => navigate(`/login`))
+              }}
+            >
+              Logout
+            </a>
+            <a
+              href="/"
+              onClick={event => {
+                event.preventDefault()
+                navigate(`/profile`)
+              }}
+            >
+              My Page
+            </a>
+          </span>
         ) : (
-          <a
-            href="/"
-            onClick={event => {
-              event.preventDefault()
-              navigate(`/login`)
-            }}
-          >
-            Login
-          </a>
+          <span>
+            <a
+              href="/"
+              onClick={event => {
+                event.preventDefault()
+                navigate(`/signup`)
+              }}
+            >
+              Sign up
+            </a>
+            <a
+              href="/"
+              onClick={event => {
+                event.preventDefault()
+                navigate(`/login`)
+              }}
+            >
+              Login
+            </a>
+          </span>
         )}
       </nav>
     </div>

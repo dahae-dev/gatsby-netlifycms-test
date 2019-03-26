@@ -1,6 +1,6 @@
 import React from "react"
 import { navigate } from "gatsby"
-import { handleSignup, isLoggedIn } from "../services/auth"
+import { handleSignup, isLoggedIn } from "../../services/auth"
 
 class Signup extends React.Component {
   state = {
