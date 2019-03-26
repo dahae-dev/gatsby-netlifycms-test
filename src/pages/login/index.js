@@ -1,24 +1,23 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable no-use-before-define */
-/* eslint-disable no-unused-vars */
-
 import React, { useState } from "react"
 import { navigate } from "gatsby"
-import { FacebookLoginButton } from "react-social-login-buttons"
+import {
+  FacebookLoginButton,
+  GoogleLoginButton,
+} from "react-social-login-buttons"
 import {
   Header,
   Container,
   Form,
   Input,
-  Button,
   Segment,
   Message,
 } from "semantic-ui-react"
+import { Button } from "reactstrap"
 
 import Layout from "../../components/layout"
 import { handleLogin, isLoggedIn } from "../../services/auth"
-import useForm from "../../components/useForm"
-import http from "../../services/httpService"
+import useForm from "../../components/reusable/useForm"
+// import http from "../../services/httpService"
 import config from "../../../.config"
 
 const LoginPage = () => {
@@ -57,23 +56,24 @@ const LoginPage = () => {
     ))
   }
 
-  const handleLogin = async social => {
-    switch (social) {
-      case "facebook":
-        const data = await http.get(`${config.SERVER_URL}/auth/${social}`)
-        console.log("TCL: LoginPage -> data", data)
-        if (data) navigate("/profile")
-        break
-      default:
-        throw new Error("[-] Social login type not mentioned.")
-    }
-  }
+  // const handleLogin = async social => {
+  //   switch (social) {
+  //     case "facebook":
+  //       const data = await http.get(`${config.SERVER_URL}/auth/${social}`)
+  //       console.log("TCL: LoginPage -> data", data)
+  //       if (data) navigate("/profile")
+  //       break
+  //     default:
+  //       throw new Error("[-] Social login type not mentioned.")
+  //   }
+  // }
 
   if (isLoggedIn()) {
     navigate(`/profile`)
   }
 
   const urlForFacebookLogin = `${config.SERVER_URL}/auth/facebook`
+  const urlForGoogleLogin = `${config.SERVER_URL}/auth/google`
 
   return (
     <>
@@ -118,14 +118,14 @@ const LoginPage = () => {
               {errors.password && (
                 <p style={{ color: "red" }}>{errors.password}</p>
               )}
-              <Button type="submit" color="orange">
+              <Button type="submit" color="primary">
                 Login
-              </Button>
-              <Button type="submit" color="blue">
-                Sign in with Facebook
               </Button>
               <a href={urlForFacebookLogin}>
                 <FacebookLoginButton />
+              </a>
+              <a href={urlForGoogleLogin}>
+                <GoogleLoginButton />
               </a>
             </Segment>
           </Form>

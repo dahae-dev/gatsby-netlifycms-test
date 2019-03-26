@@ -1,10 +1,10 @@
 import React from "react"
 import { Router } from "@reach/router"
 import Layout from "../components/layout"
-import PrivateRoute from "../components/privateRoute"
+import PrivateRoute from "../components/reusable/privateRoute"
 import Profile from "../components/profile"
-import Login from "../components/login"
-import Signup from "../components/signup"
+import Login from "../components/test/login"
+import Signup from "../components/test/signup"
 
 const App = () => (
   <Layout>
