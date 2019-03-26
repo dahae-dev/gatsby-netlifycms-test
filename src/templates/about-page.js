@@ -14,7 +14,6 @@ export const AboutPageTemplate = ({
   return (
     <div className="container">
       <div
-        className="full-width-image-container margin-top-0"
         style={{
           backgroundImage: `url(${
             !!image.childImageSharp ? image.childImageSharp.fluid.src : image
@@ -22,7 +21,6 @@ export const AboutPageTemplate = ({
         }}
       >
         <h2
-          className="has-text-weight-bold is-size-1"
           style={{
             color: "white",
             padding: "1rem",
@@ -74,7 +72,13 @@ export const pageQuery = graphql`
         main {
           heading
           blurbs {
-            image
+            image {
+              childImageSharp {
+                fluid(maxWidth: 240, quality: 100) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
             subheading
             text
           }
