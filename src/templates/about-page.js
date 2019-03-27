@@ -14,7 +14,6 @@ export const AboutPageTemplate = ({
   return (
     <div className="container">
       <div
-        className="full-width-image-container margin-top-0"
         style={{
           backgroundImage: `url(${
             !!image.childImageSharp ? image.childImageSharp.fluid.src : image
@@ -22,7 +21,6 @@ export const AboutPageTemplate = ({
         }}
       >
         <h2
-          className="has-text-weight-bold is-size-1"
           style={{
             color: "white",
             padding: "1rem",

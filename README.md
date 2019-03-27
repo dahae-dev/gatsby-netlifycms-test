@@ -1,11 +1,9 @@
 ## studystates-client using netlify cms (gatsby) evaluation
 
-
 ## Status
 
-- `dev` branch : [![CircleCI](https://circleci.com/gh/codestates/learnco-client.svg?style=svg&circle-token=ea4ca52b7b2fa94503df974fd27986c165173133)](https://circleci.com/gh/codestates/learnco-client)
-- `master` branch : manual
-
+- `dev` branch
+- `master` branch
 
 ## Gatsby Environment Variables
 
@@ -25,5 +23,3 @@
 - `yarn develop:staging`
 - `yarn build`
 - `yarn serve`
-
-
